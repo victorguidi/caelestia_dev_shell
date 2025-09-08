@@ -4,6 +4,7 @@ JsonObject {
     property bool persistent: true
     property bool showOnHover: true
     property int dragThreshold: 20
+    property ScrollActions scrollActions: ScrollActions {}
     property Workspaces workspaces: Workspaces {}
     property Tray tray: Tray {}
     property Status status: Status {}
@@ -53,6 +54,12 @@ JsonObject {
         }
     ]
 
+    component ScrollActions: JsonObject {
+        property bool workspaces: true
+        property bool volume: true
+        property bool brightness: true
+    }
+
     component Workspaces: JsonObject {
         property int shown: 5
         property bool activeIndicator: true
@@ -74,10 +81,12 @@ JsonObject {
 
     component Status: JsonObject {
         property bool showAudio: false
+        property bool showMicrophone: false
         property bool showKbLayout: false
         property bool showNetwork: true
         property bool showBluetooth: true
         property bool showBattery: true
+        property bool showLockStatus: true
     }
 
     component Clock: JsonObject {

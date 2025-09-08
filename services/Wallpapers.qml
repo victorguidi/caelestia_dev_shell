@@ -10,7 +10,7 @@ import QtQuick
 Searcher {
     id: root
 
-    readonly property string currentNamePath: Paths.strip(`${Paths.state}/wallpaper/path.txt`)
+    readonly property string currentNamePath: `${Paths.state}/wallpaper/path.txt`
     readonly property list<string> smartArg: Config.services.smartScheme ? [] : ["--no-smart"]
 
     property bool showPreview: false
@@ -37,8 +37,6 @@ Searcher {
         if (!previewColourLock)
             Colours.showPreview = false;
     }
-
-    reloadableId: "wallpapers"
 
     list: wallpapers.entries
     useFuzzy: Config.launcher.useFuzzy.wallpapers
@@ -75,7 +73,8 @@ Searcher {
     FileSystemModel {
         id: wallpapers
 
-        path: Paths.expandTilde(Paths.wallsdir)
+        recursive: true
+        path: Paths.wallsdir
         filter: FileSystemModel.Images
     }
 

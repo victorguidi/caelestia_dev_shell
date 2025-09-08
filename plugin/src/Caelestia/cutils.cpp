@@ -1,12 +1,13 @@
 #include "cutils.hpp"
 
-#include <QDir>
-#include <QObject>
-#include <QQmlEngine>
-#include <QThreadPool>
-#include <QtQuick/QQuickItem>
-#include <QtQuick/QQuickItemGrabResult>
-#include <QtQuick/QQuickWindow>
+#include <QtQuick/qquickitemgrabresult.h>
+#include <QtQuick/qquickwindow.h>
+#include <qdir.h>
+#include <qfileinfo.h>
+#include <qqmlengine.h>
+#include <qthreadpool.h>
+
+namespace caelestia {
 
 void CUtils::saveItem(QQuickItem* target, const QUrl& path) {
     this->saveItem(target, path, QRect(), QJSValue(), QJSValue());
@@ -337,3 +338,14 @@ qreal CUtils::findAverageLuminance(const QImage& image, int rescaleSize) const {
 
     return count == 0 ? 0.0 : totalLuminance / count;
 }
+
+QString CUtils::toLocalFile(const QUrl& url) const {
+    if (!url.isLocalFile()) {
+        qWarning() << "CUtils::toLocalFile: given url is not a local file" << url;
+        return QString();
+    }
+
+    return url.toLocalFile();
+}
+
+} // namespace caelestia
